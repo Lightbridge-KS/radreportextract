@@ -2,6 +2,7 @@ import re
 from typing import List
 
 class ReportRegexExtractor:
+    
     def extract_hx_imp(self, text) -> str:
         std_type = self.extract_study_type(text)
         hx = self.extract_hx(text, strick=True)
@@ -17,13 +18,13 @@ class ReportRegexExtractor:
         
     @staticmethod
     def extract_study_type(text):
-        pattern = r"(.*?)(?=\b(history|indication)\b)"
+        pattern = r"(.*?)(?=(history|indication))"
         match = re.search(pattern, text, re.DOTALL | re.IGNORECASE)
         if match:
             study_type_text = match.group(0).strip() 
             return study_type_text
         else:
-            raise ValueError("Study type not match")
+            return ""
         
 
     
@@ -108,9 +109,9 @@ class ReportRegexExtractor:
         
         # If include_key is False, remove the "impression" keyword from the result
         else:
-            key_match = re.search(r"impression:\s*(.*)", imp_text, re.DOTALL | re.IGNORECASE)
+            key_match = re.search(r"impression\s*:?\s*(.*)", imp_text, re.DOTALL | re.IGNORECASE)
             if key_match:
-                imp_text_nokey = match.group(1).strip()
+                imp_text_nokey = key_match.group(1).strip()
                 return imp_text_nokey
             else: 
                 # If the structure is unexpected and no keyword is found, return the original text
