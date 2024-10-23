@@ -83,7 +83,7 @@ class ReportRegexExtractor:
         if include_key:
             return hx_text
         else:
-            key_match = re.search(fr"({"|".join(start_key)}):\s*(.*)", hx_text, re.DOTALL | re.IGNORECASE)
+            key_match = re.search(fr"({"|".join(start_key)})\s*:?\s*(.*)", hx_text, re.DOTALL | re.IGNORECASE)
             if key_match:
                 hx_text_nokey = key_match.group(2).strip()
                 return hx_text_nokey
