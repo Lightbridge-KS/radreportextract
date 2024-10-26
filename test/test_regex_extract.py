@@ -5,7 +5,7 @@ from radreportextract import ReportRegexExtractor
 from test.example_report import example_report
 
 def report_to_list_tuple(study: str, lhs, rhs):
-    
+    "Generate list of tuples from `example_report`"
     dict_k_v = dict(zip([asdict(v)[lhs] for k, v in example_report[study].items()],
                         [asdict(v)[rhs] for k, v in example_report[study].items()]))
     
