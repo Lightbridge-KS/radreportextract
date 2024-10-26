@@ -44,18 +44,25 @@ class ReportRegexExtractor:
         consecutive newlines/tabs. If `include_key` is False, the matching keyword 
         is removed from the extracted text.
 
-        Args:
-            text (str): The report text from which the section is to be extracted.
-            include_key (bool): If True, includes the start keyword (e.g., "history") 
-                                in the extracted text. Defaults to True.
-            start_key (List[str]): List of section keywords to start the extraction. 
-                                   Defaults to ["history", "indication"].
-            end_key (List[str]): List of section keywords to stop the extraction. 
-                                 Defaults to ["technique", "comparison", "finding", "impression"].
-            strick (bool): For strick mode, only extract if there is `start_key`; otherwise return "".
+        Parameters
+        ----------
+        text : str
+            The report text from which the section is to be extracted.
+        include_key : bool, optional
+            If True, includes the start keyword (e.g., "history") 
+            in the extracted text. Defaults to True.
+        start_key : List[str], optional
+            List of section keywords to start the extraction. 
+            Defaults to ["history", "indication"].
+        end_key : List[str], optional
+            List of section keywords to stop the extraction. 
+            Defaults to ["technique", "comparison", "finding", "impression"].
+        strick : bool, optional
+            For strick mode, only extract if there is `start_key`; otherwise return "".
 
-        Returns:
-            str: The extracted section text. Returns an empty string if no match is found.
+        Returns
+        -------
+        str: The extracted section text. Returns an empty string if no match is found.
         """
 
 
@@ -95,6 +102,20 @@ class ReportRegexExtractor:
     @staticmethod
     def extract_imp(text, include_key: bool = True) -> str:
         # Regular expression to match the "Impression" section until the end
+        """
+        Extracts the "Impression" section from a given radiology report text.
+
+        Parameters
+        ----------
+        text : str
+            The radiology report text to extract from.
+        include_key : bool, optional
+            Whether to include the "impression" keyword in the result. Defaults to True.
+
+        Returns
+        -------
+        str: The extracted section text. Returns an empty string if no match is found.
+        """
         pattern = r"impression.*"
         # Extract the "Impression" section
         match = re.search(pattern, text, re.DOTALL | re.IGNORECASE)
